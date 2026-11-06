@@ -9,23 +9,11 @@ import org.testcontainers.utility.DockerImageName
 
 @TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
+    @Bean
+    @ServiceConnection
+    fun ollamaContainer(): OllamaContainer = OllamaContainer(DockerImageName.parse("ollama/ollama:latest"))
 
     @Bean
     @ServiceConnection
-    fun ollamaContainer(): OllamaContainer {
-        return OllamaContainer(DockerImageName.parse("ollama/ollama:latest"))
-    }
-
-    @Bean
-    @ServiceConnection
-    fun pgvectorContainer(): PostgreSQLContainer {
-        return PostgreSQLContainer(DockerImageName.parse("pgvector/pgvector:pg16"))
-    }
-
-    @Bean
-    @ServiceConnection
-    fun postgresContainer(): PostgreSQLContainer {
-        return PostgreSQLContainer(DockerImageName.parse("postgres:latest"))
-    }
-
+    fun pgvectorContainer(): PostgreSQLContainer = PostgreSQLContainer(DockerImageName.parse("pgvector/pgvector:pg16"))
 }
